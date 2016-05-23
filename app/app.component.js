@@ -8,14 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// Importar Core do Angular.
 var core_1 = require('@angular/core');
+// Modelo de Heroi.
+var Hero = (function () {
+    function Hero() {
+    }
+    return Hero;
+}());
+exports.Hero = Hero;
+// Definição do Comopnente AppComponent.
 var AppComponent = (function () {
     function AppComponent() {
+        // Titulo do App.
+        this.title = 'Tour of Heroes';
+        // Heroi do App.
+        this.hero = {
+            id: 1,
+            name: 'Windstorm'
+        };
     }
     AppComponent = __decorate([
         core_1.Component({
+            // Seletor CSS para Bootstrap do Componente.
             selector: 'my-app',
-            template: '<h1>My First Angular 2 App</h1>'
+            // Template do Componente.
+            template: "\n        <h1>{{title}}</h1>\n        <h2>{{hero.name}} details!</h2>\n        <div><label>id: </label>{{hero.id}}</div>\n        <div>\n            <label> name: </label>\n            <input [(ngModel)]=\"hero.name\" placeholder=\"Name\">\n        </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
