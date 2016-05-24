@@ -1,5 +1,5 @@
-// Importar Component do Core do Angular.
-import { Component } from '@angular/core';
+// Importar Component e OnInit do Core do Angular.
+import { Component, OnInit } from '@angular/core';
 
 // Importar modelo Hero.
 import { Hero } from './hero';
@@ -7,11 +7,18 @@ import { Hero } from './hero';
 // Importar Hero Detail Component.
 import { HeroDetailComponent } from './hero-detail.component';
 
+// Importar serviço HeroService para consumo de informações de heroi.
+import { HeroService } from './hero.service';
+
 // Definição do Comopnente AppComponent.
 @Component({
     // Seletor CSS para Bootstrap do Componente.
     selector: 'my-app',
-    
+
+    // Providers contem a lista de componentes/classes injetadas no componente.
+    // Sem este, o injetor não consegue determinar quais objetos estão sendo injetados na construção.
+    providers: [HeroService],
+
     // Com "Directives" informamos para o Component quais elementos HTML ele deve considerar
     // Sem este, ele ve <my-hero-detail> e considera uma tag comum.
     directives: [HeroDetailComponent],
@@ -40,7 +47,7 @@ import { HeroDetailComponent } from './hero-detail.component';
     `,
 
     // Styles do Componente.
-    styles:[`
+    styles: [`
         .selected {
             background-color: #CFD8DC !important;
             color: white;
@@ -90,19 +97,47 @@ import { HeroDetailComponent } from './hero-detail.component';
         }
     `]
 })
-export class AppComponent {
+// OnInit é uma interface que contem método NgOnInit, parte do Lifecycle do Angular
+// Este método será invocado no momento que o componente terminar de inicializar.
+export class AppComponent implements OnInit {
     // Titulo do App.
     title = 'Tour of Heroes';
 
     // Listagem de Herois.
-    heroes = HEROES;
+    heroes: Hero[];
 
     // Heroi selecionado.
     selectedHero: Hero;
 
+    // Utilizamos o Constructor para Injetar objetos no Componente.
+    // Desta forma, HeroService é injetado no AppComponent e é criado uma referência privada para este como "heroService".
+    constructor(private heroService: HeroService) {
+
+        // Invocar listagem de herois.
+        // PORÉM ISTO É ERRADO!
+        // this.getHeroes();
+        // Deve se evitar lógicas complexas dentro de métodos de construção
+        // Principalmente métodos relacionados a carregamento de informações.
+    }
+
     // Evento para selecionar heroi.
     onSelect(hero: Hero) {
         this.selectedHero = hero;
+    }
+
+    // Evento para recuperar lista de herois do Serviço.
+    getHeroes() {
+        // Não ira funcionar devido a alteração para utilização de Promise
+        // this.heroes = this.heroService.getHeroes();
+
+        // A Promise possui 2 métodos: Then e Catch. Then ocorre em sucesso. Catch, em erros.
+        // "heroes" antes de "=>" é o parametro passado pelo Then.
+        this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+    }
+
+    // Evento invocado no momento que o componente termina de inicializar.
+    ngOnInit() {
+        this.getHeroes();
     }
 }
 
