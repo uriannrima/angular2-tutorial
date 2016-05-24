@@ -1,16 +1,20 @@
-// Importar Core do Angular.
+// Importar Component do Core do Angular.
 import { Component } from '@angular/core';
 
-// Modelo de Heroi.
-export class Hero {
-    id: number;
-    name: string;
-}
+// Importar modelo Hero.
+import { Hero } from './hero';
+
+// Importar Hero Detail Component.
+import { HeroDetailComponent } from './hero-detail.component';
 
 // Definição do Comopnente AppComponent.
 @Component({
     // Seletor CSS para Bootstrap do Componente.
     selector: 'my-app',
+    
+    // Com "Directives" informamos para o Component quais elementos HTML ele deve considerar
+    // Sem este, ele ve <my-hero-detail> e considera uma tag comum.
+    directives: [HeroDetailComponent],
 
     // Template do Componente.
     template: `
@@ -30,14 +34,9 @@ export class Hero {
                 <span class="badge">{{hero.id}}</span> {{hero.name}}
             </li>
         </ul>
-        <div *ngIf="selectedHero">
-            <h2>{{selectedHero.name}} details!</h2>
-            <div><label>id: </label>{{selectedHero.id}}</div>
-            <div>
-                <label>name: </label>
-                <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-            </div>
-        </div>
+        <!-- Detalhamento irá aqui. -->
+        <!-- Com o one-way-binding tornamos o selectedHero o "hero" do componente hero-detail. -->
+        <my-hero-detail [hero]="selectedHero"></my-hero-detail>
     `,
 
     // Styles do Componente.
