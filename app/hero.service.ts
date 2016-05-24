@@ -10,6 +10,15 @@ import { Hero }from './hero';
 // Injectable determina que este objeto/classe pode ser injetado em um outro componente.
 @Injectable()
 export class HeroService {
+    
+    getHero(id: number) {
+        // Retornar um promise.resolve contendo o primeiro elemento de heroes, 
+        // cujo seu id seja igual ao parametro id. 
+        return Promise.resolve(HEROES).then(
+            heroes => heroes.filter(hero => hero.id === id)[0]
+        );
+    }
+
     // Método para recuperar os Herois.
     getHeroes() {
         // Retornar uma promise com a listagem de hérois disponiveis.
@@ -28,7 +37,7 @@ export class HeroService {
                     console.log('"Retornou..."');
                     // Invocar resolve passando o Mock-Heroes.
                     resolve(HEROES)
-                }, 4000)
+                }, 1500)
             }
         );
     }

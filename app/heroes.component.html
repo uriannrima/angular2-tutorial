@@ -1,0 +1,20 @@
+<!-- NgFor e NgIf são structural directives, pois mudam o corpo do DOM. -->
+<!-- "*" determina que neste ponto será criado um "Template", aonde seu escopo é "independente". -->
+<!-- Sendo assim "let hero" cria uma variavel "hero" somente para o escopo do NgFor. -->
+<!-- Criando um evento (event)="methodName(parameter) para manipulação. " -->
+<!-- Bindings: (input) [output] [(two-way-binding)] -->
+<!-- [class.cssClass] == true/false utilizado para definir um CSS num componente.. -->
+<h1>{{title}}</h1>
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+<!-- Detalhamento irá aqui. -->
+<!-- Com o one-way-binding tornamos o selectedHero o "hero" do componente hero-detail. -->
+<!-- my-hero-detail [hero]="selectedHero"></my-hero-detail -->
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}} is my hero.</h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>

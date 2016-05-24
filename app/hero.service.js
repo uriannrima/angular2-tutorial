@@ -16,6 +16,11 @@ var mock_heroes_1 = require('./mock-heroes');
 var HeroService = (function () {
     function HeroService() {
     }
+    HeroService.prototype.getHero = function (id) {
+        // Retornar um promise.resolve contendo o primeiro elemento de heroes, 
+        // cujo seu id seja igual ao parametro id. 
+        return Promise.resolve(mock_heroes_1.HEROES).then(function (heroes) { return heroes.filter(function (hero) { return hero.id === id; })[0]; });
+    };
     // Método para recuperar os Herois.
     HeroService.prototype.getHeroes = function () {
         // Retornar uma promise com a listagem de hérois disponiveis.
@@ -32,7 +37,7 @@ var HeroService = (function () {
                 console.log('"Retornou..."');
                 // Invocar resolve passando o Mock-Heroes.
                 resolve(mock_heroes_1.HEROES);
-            }, 4000);
+            }, 1500);
         });
     };
     HeroService = __decorate([
