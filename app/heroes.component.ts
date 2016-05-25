@@ -40,9 +40,15 @@ export class HeroesComponent implements OnInit {
     // Heroi selecionado.
     selectedHero: Hero;
 
+    // Variavel para controle da interface.
+    addingHero: boolean;
+
+    // Variavel para manter valor de error.
+    error: any;
+
     // Utilizamos o Constructor para Injetar objetos no Componente.
     // Desta forma, HeroService é injetado no AppComponent e é criado uma referência privada para este como "heroService".
-    constructor(private router: Router, private heroService: HeroService) {
+    constructor(private _router: Router, private _heroService: HeroService) {
 
         // Invocar listagem de herois.
         // PORÉM ISTO É ERRADO!
@@ -51,46 +57,69 @@ export class HeroesComponent implements OnInit {
         // Principalmente métodos relacionados a carregamento de informações.
     }
 
-    // Evento para selecionar heroi.
+    // Método para selecionar heroi.
     onSelect(hero: Hero) {
         this.selectedHero = hero;
+        this.addingHero = false;
     }
 
-    // Evento para recuperar lista de herois do Serviço.
+    // Método para recuperar lista de herois do Serviço.
     getHeroes() {
         // Não ira funcionar devido a alteração para utilização de Promise
         // this.heroes = this.heroService.getHeroes();
 
         // A Promise possui 2 métodos: Then e Catch. Then ocorre em sucesso. Catch, em erros.
         // "heroes" antes de "=>" é o parametro passado pelo Then.
-        this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+        this._heroService.getHeroes()
+            .then(heroes => this.heroes = heroes)
+            .catch(error => this.error = error); // TODO: Display error message;
     }
 
-    // Evento invocado no momento que o componente termina de inicializar.
+    // Método invocado no momento que o componente termina de inicializar.
     ngOnInit() {
         this.getHeroes();
     }
 
-    // Evento invocado ao desejar detalhes de um heroi.
+    // Método invocado ao desejar detalhes de um heroi.
     gotoDetail() {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
         let link = ['HeroDetail', { id: this.selectedHero.id }];
-        
+
         // Invocar navegação.
-        this.router.navigate(link);
+        this._router.navigate(link);
+    }
+
+    // Método para gerenciar criação de um novo heroi.
+    addHero() {
+        this.addingHero = true;
+        this.selectedHero = null;
+    }
+
+    // Método para fechar parte da interface para salvar heroi.
+    // Quando ocorre evento "close" do HeroDetail é enviado um heroi, que foi salvo.
+    // Este heroi então é passado para este método.
+    close(savedHero: Hero) {
+        this.addingHero = false;
+        if (savedHero) {
+            this.getHeroes();
+        }
+    }
+
+    // Método para deletar heroi.
+    delete(hero: Hero, event: any) {
+        // Parar evento?
+        event.stopPropagation();
+
+        // Invocar serviço para deletar heroi.
+        this._heroService
+            .delete(hero)
+            .then(response => {
+                // Filtrar lista por sometne herois que não são o heroi deletado.
+                this.heroes = this.heroes.filter(h => h !== hero);
+                if (this.selectedHero === hero) {
+                    this.selectedHero = null;
+                }
+            })
+            .catch(error => this.error = error); // TODO: Display error message
     }
 }
-
-// Stub de Herois.
-var HEROES: Hero[] = [
-    { "id": 11, "name": "Mr. Nice" },
-    { "id": 12, "name": "Narco" },
-    { "id": 13, "name": "Bombasto" },
-    { "id": 14, "name": "Celeritas" },
-    { "id": 15, "name": "Magneta" },
-    { "id": 16, "name": "RubberMan" },
-    { "id": 17, "name": "Dynama" },
-    { "id": 18, "name": "Dr IQ" },
-    { "id": 19, "name": "Magma" },
-    { "id": 20, "name": "Tornado" }
-];

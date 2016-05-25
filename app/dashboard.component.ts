@@ -30,7 +30,7 @@ export class DashboardComponent {
 
     // Evento invocado no momento que o componente termina de inicializar.
     ngOnInit() {
-        this.heroService.getHeroesSlowly().then(
+        this.heroService.getHeroes().then(
             heroes => {
                 this.heroes = heroes.slice(1, 5)
             }

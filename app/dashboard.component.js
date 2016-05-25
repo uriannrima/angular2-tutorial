@@ -26,7 +26,7 @@ var DashboardComponent = (function () {
     // Evento invocado no momento que o componente termina de inicializar.
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.heroService.getHeroesSlowly().then(function (heroes) {
+        this.heroService.getHeroes().then(function (heroes) {
             _this.heroes = heroes.slice(1, 5);
         });
     };

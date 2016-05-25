@@ -1,5 +1,6 @@
 "use strict";
 // Exportar variavel contendo nossos Mock-Heroes.
+// Não mais utilizado após criação do InMemoryDataService
 exports.HEROES = [
     { id: 11, name: 'Mr. Nice' },
     { id: 12, name: 'Narco' },

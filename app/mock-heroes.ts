@@ -2,6 +2,7 @@
 import { Hero } from './hero';
 
 // Exportar variavel contendo nossos Mock-Heroes.
+// Não mais utilizado após criação do InMemoryDataService
 export var HEROES: Hero[] = [
     { id: 11, name: 'Mr. Nice' },
     { id: 12, name: 'Narco' },
