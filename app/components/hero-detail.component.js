@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // Importar Component, Input, Output, OnInit e EventEmitter do Core do Angular
 var core_1 = require('@angular/core');
 // Importar modelo Hero.
-var hero_1 = require('./hero');
+var hero_1 = require('../models/hero');
 // Importar _routeParams para recuperação de parameterId.
 var router_deprecated_1 = require('@angular/router-deprecated');
 // Importar _heroService contendo meios de recuperar lista de herois.
-var hero_service_1 = require('./hero.service');
+var hero_service_1 = require('../services/hero.service');
 // Criar Componente HeroDetailComponent
 var HeroDetailComponent = (function () {
     // Construir objeto injetando HeroService e RouteParams.
@@ -76,8 +76,8 @@ var HeroDetailComponent = (function () {
             // Seletor CSS.
             selector: 'my-hero-detail',
             // Template do Componente.
-            templateUrl: 'app/hero-detail.component.html',
-            styleUrls: ['app/hero-detail.component.css']
+            templateUrl: 'app/templates/hero-detail.component.html',
+            styleUrls: ['app/styles/hero-detail.component.css']
         }), 
         __metadata('design:paramtypes', [hero_service_1.HeroService, router_deprecated_1.RouteParams])
     ], HeroDetailComponent);

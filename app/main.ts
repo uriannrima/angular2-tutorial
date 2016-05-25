@@ -4,7 +4,7 @@
 import { provide }    from '@angular/core';
 import { XHRBackend } from '@angular/http';
 import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data.service';
 
 // Fim
 
@@ -15,7 +15,7 @@ import { bootstrap }    from '@angular/platform-browser-dynamic';
 import { HTTP_PROVIDERS } from '@angular/http';
 
 // Importar AppComponent.
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
 
 // Realizar bootstrap.
 // Porque o registro esta sendo feito a nivel de aplicação, e não de componente (AppComponent)?

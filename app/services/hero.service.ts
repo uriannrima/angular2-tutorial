@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 // import { HEROES } from './mock-heroes';
 
 // Importar modelo de Hero.
-import { Hero } from './hero';
+import { Hero } from '../models/hero';
 
 // Injectable determina que este objeto/classe pode ser injetado em um outro componente.
 @Injectable()

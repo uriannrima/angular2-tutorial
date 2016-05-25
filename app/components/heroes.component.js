@@ -13,7 +13,7 @@ var core_1 = require('@angular/core');
 // Importar Hero Detail Component.
 var hero_detail_component_1 = require('./hero-detail.component');
 // Importar serviço HeroService para consumo de informações de heroi.
-var hero_service_1 = require('./hero.service');
+var hero_service_1 = require('../services/hero.service');
 // Importar Router do Angular.
 var router_deprecated_1 = require('@angular/router-deprecated');
 // Definição do Comopnente HeroesComponent.
@@ -64,6 +64,8 @@ var HeroesComponent = (function () {
         this.selectedHero = null;
     };
     // Método para fechar parte da interface para salvar heroi.
+    // Quando ocorre evento "close" do HeroDetail é enviado um heroi, que foi salvo.
+    // Este heroi então é passado para este método.
     HeroesComponent.prototype.close = function (savedHero) {
         this.addingHero = false;
         if (savedHero) {
@@ -95,9 +97,9 @@ var HeroesComponent = (function () {
             // Sem este, ele ve <my-hero-detail> e considera uma tag comum.
             directives: [hero_detail_component_1.HeroDetailComponent],
             // Template do Componente.
-            templateUrl: 'app/heroes.component.html',
+            templateUrl: 'app/templates/heroes.component.html',
             // Styles do Componente.
-            styleUrls: ['app/heroes.component.css']
+            styleUrls: ['app/styles/heroes.component.css']
         }), 
         __metadata('design:paramtypes', [router_deprecated_1.Router, hero_service_1.HeroService])
     ], HeroesComponent);

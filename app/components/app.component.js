@@ -11,13 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // Importar Component do Core do Angular
 var core_1 = require('@angular/core');
 // Importar HeroService contendo meios de recuperar lista de herois.
-var hero_service_1 = require('./hero.service');
+var hero_service_1 = require('../services/hero.service');
 // Importar HeroesComponent contendo listagem dos herois.
 var heroes_component_1 = require('./heroes.component');
 // Importar DashboardComponent contendo top herois.
 var dashboard_component_1 = require('./dashboard.component');
 // Importar DashboardComponent contendo top herois.
 var hero_detail_component_1 = require('./hero-detail.component');
+// Importar HeroFormComponent contendo formulário de heroi.
+var hero_form_component_1 = require('./hero-form.component');
 // Importar Configurações de Router, Directives e Providers (Services).
 var router_deprecated_1 = require('@angular/router-deprecated');
 // Configuração de Rota
@@ -52,12 +54,18 @@ var AppComponent = (function () {
                 path: '/detail/:id',
                 name: 'HeroDetail',
                 component: hero_detail_component_1.HeroDetailComponent
+            },
+            {
+                // Path analisado no Browser contendo "parameterId".
+                path: '/form',
+                name: 'HeroForm',
+                component: hero_form_component_1.HeroFormComponent
             }
         ]),
         core_1.Component({
             // Seletor CSS.
             selector: 'my-app',
-            styleUrls: ['app/app.component.css'],
+            styleUrls: ['app/styles/app.component.css'],
             // Template do Componente.
             template: "\n        <h1>{{title}}</h1>\n        <!-- routerLink define qual Route esta sendo definida ao clicar naquele elemento. -->\n        <!-- Heroes ir\u00E1 nos \"redirecionar\" para o Componente HeroesComponent. -->\n        <!-- \n            Como AppComponent contem o \"root\" para a navega\u00E7\u00E3o e teoricamente faz o route para outras paginas\n            ela \u00E9 considerada uma Router Component. \n        -->\n        <nav>\n            <a [routerLink]=\"['Dashboard']\">Dashboard</a>\n            <a [routerLink]=\"['Heroes']\">Heroes</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
             // Com "Directives" informamos para o Component quais elementos HTML ele deve considerar

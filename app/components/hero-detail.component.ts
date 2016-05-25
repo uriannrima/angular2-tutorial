@@ -2,13 +2,13 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 // Importar modelo Hero.
-import { Hero } from './hero';
+import { Hero } from '../models/hero';
 
 // Importar _routeParams para recuperação de parameterId.
 import { RouteParams } from '@angular/router-deprecated';
 
 // Importar _heroService contendo meios de recuperar lista de herois.
-import { HeroService } from './hero.service';
+import { HeroService } from '../services/hero.service';
 
 // Criar Componente HeroDetailComponent
 @Component({
@@ -16,9 +16,9 @@ import { HeroService } from './hero.service';
     selector: 'my-hero-detail',
 
     // Template do Componente.
-    templateUrl: 'app/hero-detail.component.html',
+    templateUrl: 'app/templates/hero-detail.component.html',
 
-    styleUrls: ['app/hero-detail.component.css']
+    styleUrls: ['app/styles/hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
     // Como Hero será uma objeto vindo do componente pai (externo) ao HeroDetailComponent

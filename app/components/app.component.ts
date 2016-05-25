@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 // Importar HeroService contendo meios de recuperar lista de herois.
-import { HeroService } from './hero.service';
+import { HeroService } from '../services/hero.service';
 
 // Importar HeroesComponent contendo listagem dos herois.
 import { HeroesComponent } from './heroes.component';
@@ -12,6 +12,9 @@ import { DashboardComponent } from './dashboard.component';
 
 // Importar DashboardComponent contendo top herois.
 import { HeroDetailComponent } from './hero-detail.component';
+
+// Importar HeroFormComponent contendo formulário de heroi.
+import { HeroFormComponent } from './hero-form.component';
 
 // Importar Configurações de Router, Directives e Providers (Services).
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -42,6 +45,12 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
         path: '/detail/:id',
         name: 'HeroDetail',
         component: HeroDetailComponent
+    },
+    {
+        // Path analisado no Browser contendo "parameterId".
+        path: '/form',
+        name: 'HeroForm',
+        component: HeroFormComponent
     }
 ])
 // Definição do Comopnente AppComponent.
@@ -49,7 +58,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
     // Seletor CSS.
     selector: 'my-app',
     
-    styleUrls: ['app/app.component.css'],
+    styleUrls: ['app/styles/app.component.css'],
 
     // Template do Componente.
     template: `

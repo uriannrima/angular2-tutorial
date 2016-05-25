@@ -2,13 +2,13 @@
 import { Component, OnInit } from '@angular/core';
 
 // Importar modelo Hero.
-import { Hero } from './hero';
+import { Hero } from '../models/hero';
 
 // Importar Hero Detail Component.
 import { HeroDetailComponent } from './hero-detail.component';
 
 // Importar serviço HeroService para consumo de informações de heroi.
-import { HeroService } from './hero.service';
+import { HeroService } from '../services/hero.service';
 
 // Importar Router do Angular.
 import { Router } from '@angular/router-deprecated';
@@ -23,10 +23,10 @@ import { Router } from '@angular/router-deprecated';
     directives: [HeroDetailComponent],
 
     // Template do Componente.
-    templateUrl: 'app/heroes.component.html',
+    templateUrl: 'app/templates/heroes.component.html',
 
     // Styles do Componente.
-    styleUrls: ['app/heroes.component.css']
+    styleUrls: ['app/styles/heroes.component.css']
 })
 // OnInit é uma interface que contem método NgOnInit, parte do Lifecycle do Angular
 // Este método será invocado no momento que o componente terminar de inicializar.

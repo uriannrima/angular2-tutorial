@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // Importar Component e OnInit do Core do Angular
 var core_1 = require('@angular/core');
 // Importar serviço HeroService para consumo de informações de heroi.
-var hero_service_1 = require('./hero.service');
+var hero_service_1 = require('../services/hero.service');
 // Importar Router do Angular.
 var router_deprecated_1 = require('@angular/router-deprecated');
 // Definição do Componente DashboardComponent.
@@ -43,8 +43,8 @@ var DashboardComponent = (function () {
             selector: 'my-dashboard',
             // Template do Componente.
             // template: '<h3>My Dashboard</h3>'
-            templateUrl: '/app/dashboard.component.html',
-            styleUrls: ['app/dashboard.component.css']
+            templateUrl: '/app/templates/dashboard.component.html',
+            styleUrls: ['app/styles/dashboard.component.css']
         }), 
         __metadata('design:paramtypes', [router_deprecated_1.Router, hero_service_1.HeroService])
     ], DashboardComponent);

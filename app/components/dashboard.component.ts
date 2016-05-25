@@ -2,10 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 
 // Importar modelo Hero.
-import { Hero } from './hero';
+import { Hero } from '../models/hero';
 
 // Importar serviço HeroService para consumo de informações de heroi.
-import { HeroService } from './hero.service';
+import { HeroService } from '../services/hero.service';
 
 // Importar Router do Angular.
 import { Router } from '@angular/router-deprecated';
@@ -17,9 +17,9 @@ import { Router } from '@angular/router-deprecated';
 
     // Template do Componente.
     // template: '<h3>My Dashboard</h3>'
-    templateUrl: '/app/dashboard.component.html',
+    templateUrl: '/app/templates/dashboard.component.html',
     
-    styleUrls: ['app/dashboard.component.css']
+    styleUrls: ['app/styles/dashboard.component.css']
 })
 export class DashboardComponent {
     // Heroes é array do tipo Hero, inicializado com array vazio.
