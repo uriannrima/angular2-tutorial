@@ -57,7 +57,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 @Component({
     // Seletor CSS.
     selector: 'my-app',
-    
+
     styleUrls: ['app/styles/app.component.css'],
 
     // Template do Componente.

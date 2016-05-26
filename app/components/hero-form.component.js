@@ -14,11 +14,13 @@ var hero_1 = require('../models/hero');
 var HeroFormComponent = (function () {
     function HeroFormComponent() {
         // Lista de Super Poderes
-        this.powers = ['Select a power', 'Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
+        this.powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
         // Heroi default.
-        this.hero = new hero_1.Hero(1, "", this.powers[0]);
+        this.hero = new hero_1.Hero();
         // Form foi submetido?
         this.submitted = false;
+        // Form esta ativo?
+        this.active = true;
     }
     // Método de Submit do Form.
     HeroFormComponent.prototype.onSubmit = function () {
@@ -32,6 +34,17 @@ var HeroFormComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    // Método para recriar o formulário vazio.
+    HeroFormComponent.prototype.newHero = function () {
+        var _this = this;
+        // Recriar hero.
+        this.hero = new hero_1.Hero();
+        // Desativar o form.
+        this.active = false;
+        // Aguardar 0ms e reativar o form.
+        // Com isso, as validações deste são "recriadas".
+        setTimeout(function () { return _this.active = true; }, 0);
+    };
     HeroFormComponent = __decorate([
         core_1.Component({
             selector: 'hero-form',
