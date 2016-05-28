@@ -57,7 +57,7 @@ var AppComponent = (function () {
             },
             {
                 // Path analisado no Browser contendo "parameterId".
-                path: '/form',
+                path: '/form/:id',
                 name: 'HeroForm',
                 component: hero_form_component_1.HeroFormComponent
             }
@@ -67,7 +67,7 @@ var AppComponent = (function () {
             selector: 'my-app',
             styleUrls: ['app/styles/app.component.css'],
             // Template do Componente.
-            template: "\n        <h1>{{title}}</h1>\n        <!-- routerLink define qual Route esta sendo definida ao clicar naquele elemento. -->\n        <!-- Heroes ir\u00E1 nos \"redirecionar\" para o Componente HeroesComponent. -->\n        <!-- \n            Como AppComponent contem o \"root\" para a navega\u00E7\u00E3o e teoricamente faz o route para outras paginas\n            ela \u00E9 considerada uma Router Component. \n        -->\n        <nav>\n            <a [routerLink]=\"['Dashboard']\">Dashboard</a>\n            <a [routerLink]=\"['Heroes']\">Heroes</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
+            templateUrl: 'app/templates/app.component.html',
             // Com "Directives" informamos para o Component quais elementos HTML ele deve considerar
             // Sem este, ele ve <my-hero-detail> e considera uma tag comum.
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],

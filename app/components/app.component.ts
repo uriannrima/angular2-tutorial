@@ -48,7 +48,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
     },
     {
         // Path analisado no Browser contendo "parameterId".
-        path: '/form',
+        path: '/form/:id',
         name: 'HeroForm',
         component: HeroFormComponent
     }
@@ -61,20 +61,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
     styleUrls: ['app/styles/app.component.css'],
 
     // Template do Componente.
-    template: `
-        <h1>{{title}}</h1>
-        <!-- routerLink define qual Route esta sendo definida ao clicar naquele elemento. -->
-        <!-- Heroes irá nos "redirecionar" para o Componente HeroesComponent. -->
-        <!-- 
-            Como AppComponent contem o "root" para a navegação e teoricamente faz o route para outras paginas
-            ela é considerada uma Router Component. 
-        -->
-        <nav>
-            <a [routerLink]="['Dashboard']">Dashboard</a>
-            <a [routerLink]="['Heroes']">Heroes</a>
-        </nav>
-        <router-outlet></router-outlet>
-    `,
+    templateUrl: 'app/templates/app.component.html',
 
     // Com "Directives" informamos para o Component quais elementos HTML ele deve considerar
     // Sem este, ele ve <my-hero-detail> e considera uma tag comum.

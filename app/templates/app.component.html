@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+<!-- routerLink define qual Route esta sendo definida ao clicar naquele elemento. -->
+<!-- Heroes irá nos "redirecionar" para o Componente HeroesComponent. -->
+<!-- 
+    Como AppComponent contem o "root" para a navegação e teoricamente faz o 
+    route para outras paginas ela é considerada uma Router Component. 
+-->
+<nav>
+    <a [routerLink]="['Dashboard']">Dashboard</a>
+    <a [routerLink]="['Heroes']">Heroes</a>
+</nav>
+<router-outlet></router-outlet>

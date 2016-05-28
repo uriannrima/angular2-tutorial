@@ -1,4 +1,9 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,8 +16,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // Imports
 var core_1 = require('@angular/core');
 var hero_1 = require('../models/hero');
-var HeroFormComponent = (function () {
-    function HeroFormComponent() {
+var base_component_1 = require('./base.component');
+// Importar _routeParams para recuperação de parameterId.
+var router_deprecated_1 = require('@angular/router-deprecated');
+// Importar _heroService contendo meios de recuperar lista de herois.
+var hero_service_1 = require('../services/hero.service');
+var HeroFormComponent = (function (_super) {
+    __extends(HeroFormComponent, _super);
+    function HeroFormComponent(_heroService, _routeParams) {
+        _super.call(this);
+        this._heroService = _heroService;
+        this._routeParams = _routeParams;
         // Lista de Super Poderes
         this.powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
         // Heroi default.
@@ -22,9 +36,46 @@ var HeroFormComponent = (function () {
         // Form esta ativo?
         this.active = true;
     }
+    // ngOnInit invocado para apresentar os componentes padrões.
+    HeroFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this._routeParams.get("id") !== null) {
+            var id = +this._routeParams.get("id");
+            this._heroService.getHero(id).then(function (hero) {
+                _this.hero = hero;
+                _this.show("#pnlHeroForm");
+            });
+        }
+        else {
+            this.hero = new hero_1.Hero();
+            this.show("#pnlHeroForm");
+        }
+    };
+    HeroFormComponent.prototype.onReturn = function () {
+        if (this.hero.id !== null) {
+            window.history.back();
+        }
+    };
     // Método de Submit do Form.
     HeroFormComponent.prototype.onSubmit = function () {
-        this.submitted = true;
+        var _this = this;
+        // Esconder pnlHeroForm
+        this.hide("#pnlHeroForm", function () {
+            _this._heroService.save(_this.hero).then(function (hero) {
+                _this.hero = hero;
+                // Remover componentes que não devem aparecer.
+                _this.submitted = true;
+                // Mostrar detalhes.
+                _this.show("#pnlHeroDetails");
+            });
+        });
+    };
+    HeroFormComponent.prototype.onEdit = function () {
+        var _this = this;
+        this.hide("#pnlHeroDetails", function () {
+            _this.submitted = false;
+            _this.show("#pnlHeroForm");
+        });
     };
     Object.defineProperty(HeroFormComponent.prototype, "diagnostic", {
         // Método que retorna JSON de Diagnostico do Modelo.
@@ -37,22 +88,38 @@ var HeroFormComponent = (function () {
     // Método para recriar o formulário vazio.
     HeroFormComponent.prototype.newHero = function () {
         var _this = this;
-        // Recriar hero.
-        this.hero = new hero_1.Hero();
-        // Desativar o form.
+        // Sumir o form.        
+        this.hide("#pnlHeroForm", function () {
+            // Recriar HeroForm.
+            _this.reacreateForm();
+            // Mostrar o form.
+            _this.show("#pnlHeroForm");
+        });
+    };
+    // Recriar formulário de heroi.
+    // O formulário não retorna para "pristine" somente ao limpar a variavel que ele referencia.
+    // Devido a isso, como workaround, devemos "recria-lo", utilizando *ngIf.
+    // "Active" destroi e reconstroi o formulário.
+    HeroFormComponent.prototype.reacreateForm = function () {
+        var _this = this;
+        // "Destrui-lo"
         this.active = false;
-        // Aguardar 0ms e reativar o form.
-        // Com isso, as validações deste são "recriadas".
-        setTimeout(function () { return _this.active = true; }, 0);
+        // Limpar heroi.
+        this.hero = new hero_1.Hero();
+        // Aguardar 0 ms para "recriar"" formulário.
+        setTimeout(function () {
+            // "Recria-lo"
+            _this.active = true;
+        });
     };
     HeroFormComponent = __decorate([
         core_1.Component({
             selector: 'hero-form',
             templateUrl: 'app/templates/hero-form.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [hero_service_1.HeroService, router_deprecated_1.RouteParams])
     ], HeroFormComponent);
     return HeroFormComponent;
-}());
+}(base_component_1.BaseComponent));
 exports.HeroFormComponent = HeroFormComponent;
 //# sourceMappingURL=hero-form.component.js.map

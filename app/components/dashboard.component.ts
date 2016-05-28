@@ -32,7 +32,7 @@ export class DashboardComponent {
     ngOnInit() {
         this.heroService.getHeroes().then(
             heroes => {
-                this.heroes = heroes.slice(1, 5)
+                this.heroes = heroes.slice(0, 4)
             }
         );
     }
@@ -40,7 +40,7 @@ export class DashboardComponent {
     // Evento invocado para ir para o detalhamento do heroi.
     gotoDetail(hero: Hero) {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        let link = ['HeroDetail', { id: hero.id }];
+        let link = ['HeroForm', { id: hero.id }];
         
         // Invocar navegação.
         this.router.navigate(link);

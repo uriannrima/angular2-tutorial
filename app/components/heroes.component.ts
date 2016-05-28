@@ -83,7 +83,7 @@ export class HeroesComponent implements OnInit {
     // Método invocado ao desejar detalhes de um heroi.
     gotoDetail() {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        let link = ['HeroDetail', { id: this.selectedHero.id }];
+        let link = ['HeroForm', { id: this.selectedHero.id }];
 
         // Invocar navegação.
         this._router.navigate(link);

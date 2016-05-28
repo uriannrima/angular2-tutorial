@@ -6,16 +6,16 @@ var InMemoryDataService = (function () {
     // Método para criar o DataBase.
     InMemoryDataService.prototype.createDb = function () {
         var heroes = [
-            { id: 11, name: 'Mr. Nice' },
-            { id: 12, name: 'Narco' },
-            { id: 13, name: 'Bombasto' },
-            { id: 14, name: 'Celeritas' },
-            { id: 15, name: 'Magneta' },
-            { id: 16, name: 'RubberMan' },
-            { id: 17, name: 'Dynama' },
-            { id: 18, name: 'Dr IQ' },
-            { id: 19, name: 'Magma' },
-            { id: 20, name: 'Tornado' }
+            { id: 1, name: 'Mr. Nice', power: 'Super Hot', alterEgo: 'Luciano Lima' },
+            { id: 2, name: 'Narco', "power": "Super Flexible" },
+            { id: 3, name: 'Bombasto', power: 'Super Hot' },
+            { id: 4, name: 'Celeritas', "power": "Super Flexible" },
+            { id: 5, name: 'Magneta', power: 'Super Hot' },
+            { id: 6, name: 'RubberMan', "power": "Super Flexible" },
+            { id: 7, name: 'Dynama', power: 'Super Hot' },
+            { id: 8, name: 'Dr IQ', "power": "Weather Changer" },
+            { id: 9, name: 'Magma', power: 'Super Hot' },
+            { id: 10, name: 'Tornado', "power": "Weather Changer" }
         ];
         return { heroes: heroes };
     };

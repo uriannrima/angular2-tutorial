@@ -54,7 +54,7 @@ var HeroesComponent = (function () {
     // Método invocado ao desejar detalhes de um heroi.
     HeroesComponent.prototype.gotoDetail = function () {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        var link = ['HeroDetail', { id: this.selectedHero.id }];
+        var link = ['HeroForm', { id: this.selectedHero.id }];
         // Invocar navegação.
         this._router.navigate(link);
     };

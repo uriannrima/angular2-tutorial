@@ -27,13 +27,13 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.heroService.getHeroes().then(function (heroes) {
-            _this.heroes = heroes.slice(1, 5);
+            _this.heroes = heroes.slice(0, 4);
         });
     };
     // Evento invocado para ir para o detalhamento do heroi.
     DashboardComponent.prototype.gotoDetail = function (hero) {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        var link = ['HeroDetail', { id: hero.id }];
+        var link = ['HeroForm', { id: hero.id }];
         // Invocar navegação.
         this.router.navigate(link);
     };
