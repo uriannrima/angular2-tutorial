@@ -8,7 +8,7 @@ import { Hero } from '../models/hero';
 import { HeroService } from '../services/hero.service';
 
 // Importar Router do Angular.
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 // Definição do Componente DashboardComponent.
 @Component({
@@ -40,7 +40,7 @@ export class DashboardComponent {
     // Evento invocado para ir para o detalhamento do heroi.
     gotoDetail(hero: Hero) {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        let link = ['HeroForm', { id: hero.id }];
+        let link = ['/form', hero.id];
         
         // Invocar navegação.
         this.router.navigate(link);

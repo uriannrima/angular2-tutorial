@@ -17,16 +17,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var hero_1 = require('../models/hero');
 var base_component_1 = require('./base.component');
-// Importar _routeParams para recuperação de parameterId.
-var router_deprecated_1 = require('@angular/router-deprecated');
-// Importar _heroService contendo meios de recuperar lista de herois.
+// Importar RouteParams para recuperação de parameterId.
+var router_1 = require('@angular/router');
+// Importar HeroService contendo meios de recuperar lista de herois.
 var hero_service_1 = require('../services/hero.service');
 var HeroFormComponent = (function (_super) {
     __extends(HeroFormComponent, _super);
-    function HeroFormComponent(_heroService, _routeParams) {
+    function HeroFormComponent(heroService, routeSegment) {
         _super.call(this);
-        this._heroService = _heroService;
-        this._routeParams = _routeParams;
+        this.heroService = heroService;
+        this.routeSegment = routeSegment;
         // Lista de Super Poderes
         this.powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
         // Heroi default.
@@ -39,9 +39,9 @@ var HeroFormComponent = (function (_super) {
     // ngOnInit invocado para apresentar os componentes padrões.
     HeroFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (this._routeParams.get("id") !== null) {
-            var id = +this._routeParams.get("id");
-            this._heroService.getHero(id).then(function (hero) {
+        if (this.routeSegment.getParam("id") !== null) {
+            var id = +this.routeSegment.getParam("id");
+            this.heroService.getHero(id).then(function (hero) {
                 _this.hero = hero;
                 _this.show("#pnlHeroForm");
             });
@@ -61,7 +61,7 @@ var HeroFormComponent = (function (_super) {
         var _this = this;
         // Esconder pnlHeroForm
         this.hide("#pnlHeroForm", function () {
-            _this._heroService.save(_this.hero).then(function (hero) {
+            _this.heroService.save(_this.hero).then(function (hero) {
                 _this.hero = hero;
                 // Remover componentes que não devem aparecer.
                 _this.submitted = true;
@@ -117,7 +117,7 @@ var HeroFormComponent = (function (_super) {
             selector: 'hero-form',
             templateUrl: 'app/templates/hero-form.component.html'
         }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService, router_deprecated_1.RouteParams])
+        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.RouteSegment])
     ], HeroFormComponent);
     return HeroFormComponent;
 }(base_component_1.BaseComponent));

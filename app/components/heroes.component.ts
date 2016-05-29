@@ -11,7 +11,7 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from '../services/hero.service';
 
 // Importar Router do Angular.
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 // Definição do Comopnente HeroesComponent.
 @Component({
@@ -48,7 +48,7 @@ export class HeroesComponent implements OnInit {
 
     // Utilizamos o Constructor para Injetar objetos no Componente.
     // Desta forma, HeroService é injetado no AppComponent e é criado uma referência privada para este como "heroService".
-    constructor(private _router: Router, private _heroService: HeroService) {
+    constructor(private router: Router, private heroService: HeroService) {
 
         // Invocar listagem de herois.
         // PORÉM ISTO É ERRADO!
@@ -70,7 +70,7 @@ export class HeroesComponent implements OnInit {
 
         // A Promise possui 2 métodos: Then e Catch. Then ocorre em sucesso. Catch, em erros.
         // "heroes" antes de "=>" é o parametro passado pelo Then.
-        this._heroService.getHeroes()
+        this.heroService.getHeroes()
             .then(heroes => this.heroes = heroes)
             .catch(error => this.error = error); // TODO: Display error message;
     }
@@ -83,10 +83,10 @@ export class HeroesComponent implements OnInit {
     // Método invocado ao desejar detalhes de um heroi.
     gotoDetail() {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        let link = ['HeroForm', { id: this.selectedHero.id }];
+        let link = ['/form', this.selectedHero.id];
 
         // Invocar navegação.
-        this._router.navigate(link);
+        this.router.navigate(link);
     }
 
     // Método para gerenciar criação de um novo heroi.
@@ -111,7 +111,7 @@ export class HeroesComponent implements OnInit {
         event.stopPropagation();
 
         // Invocar serviço para deletar heroi.
-        this._heroService
+        this.heroService
             .delete(hero)
             .then(response => {
                 // Filtrar lista por sometne herois que não são o heroi deletado.

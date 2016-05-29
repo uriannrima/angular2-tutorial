@@ -15,14 +15,14 @@ var hero_detail_component_1 = require('./hero-detail.component');
 // Importar serviço HeroService para consumo de informações de heroi.
 var hero_service_1 = require('../services/hero.service');
 // Importar Router do Angular.
-var router_deprecated_1 = require('@angular/router-deprecated');
+var router_1 = require('@angular/router');
 // Definição do Comopnente HeroesComponent.
 var HeroesComponent = (function () {
     // Utilizamos o Constructor para Injetar objetos no Componente.
     // Desta forma, HeroService é injetado no AppComponent e é criado uma referência privada para este como "heroService".
-    function HeroesComponent(_router, _heroService) {
-        this._router = _router;
-        this._heroService = _heroService;
+    function HeroesComponent(router, heroService) {
+        this.router = router;
+        this.heroService = heroService;
         // Titulo do App.
         this.title = 'Tour of Heroes';
         // Invocar listagem de herois.
@@ -43,7 +43,7 @@ var HeroesComponent = (function () {
         var _this = this;
         // A Promise possui 2 métodos: Then e Catch. Then ocorre em sucesso. Catch, em erros.
         // "heroes" antes de "=>" é o parametro passado pelo Then.
-        this._heroService.getHeroes()
+        this.heroService.getHeroes()
             .then(function (heroes) { return _this.heroes = heroes; })
             .catch(function (error) { return _this.error = error; }); // TODO: Display error message;
     };
@@ -54,9 +54,9 @@ var HeroesComponent = (function () {
     // Método invocado ao desejar detalhes de um heroi.
     HeroesComponent.prototype.gotoDetail = function () {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        var link = ['HeroForm', { id: this.selectedHero.id }];
+        var link = ['/form', this.selectedHero.id];
         // Invocar navegação.
-        this._router.navigate(link);
+        this.router.navigate(link);
     };
     // Método para gerenciar criação de um novo heroi.
     HeroesComponent.prototype.addHero = function () {
@@ -78,7 +78,7 @@ var HeroesComponent = (function () {
         // Parar evento?
         event.stopPropagation();
         // Invocar serviço para deletar heroi.
-        this._heroService
+        this.heroService
             .delete(hero)
             .then(function (response) {
             // Filtrar lista por sometne herois que não são o heroi deletado.
@@ -101,7 +101,7 @@ var HeroesComponent = (function () {
             // Styles do Componente.
             styleUrls: ['app/styles/heroes.component.css']
         }), 
-        __metadata('design:paramtypes', [router_deprecated_1.Router, hero_service_1.HeroService])
+        __metadata('design:paramtypes', [router_1.Router, hero_service_1.HeroService])
     ], HeroesComponent);
     return HeroesComponent;
 }());

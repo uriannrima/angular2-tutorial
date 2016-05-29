@@ -13,7 +13,7 @@ var core_1 = require('@angular/core');
 // Importar serviço HeroService para consumo de informações de heroi.
 var hero_service_1 = require('../services/hero.service');
 // Importar Router do Angular.
-var router_deprecated_1 = require('@angular/router-deprecated');
+var router_1 = require('@angular/router');
 // Definição do Componente DashboardComponent.
 var DashboardComponent = (function () {
     // Constuir e injetar HeroService e Router.
@@ -33,7 +33,7 @@ var DashboardComponent = (function () {
     // Evento invocado para ir para o detalhamento do heroi.
     DashboardComponent.prototype.gotoDetail = function (hero) {
         // Criar array definindo um RouteLink, com Nome e Parameter Id
-        var link = ['HeroForm', { id: hero.id }];
+        var link = ['/form', hero.id];
         // Invocar navegação.
         this.router.navigate(link);
     };
@@ -46,7 +46,7 @@ var DashboardComponent = (function () {
             templateUrl: '/app/templates/dashboard.component.html',
             styleUrls: ['app/styles/dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [router_deprecated_1.Router, hero_service_1.HeroService])
+        __metadata('design:paramtypes', [router_1.Router, hero_service_1.HeroService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

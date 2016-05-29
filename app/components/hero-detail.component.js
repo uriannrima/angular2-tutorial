@@ -12,16 +12,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 // Importar modelo Hero.
 var hero_1 = require('../models/hero');
-// Importar _routeParams para recuperação de parameterId.
-var router_deprecated_1 = require('@angular/router-deprecated');
-// Importar _heroService contendo meios de recuperar lista de herois.
+// Importar RouteParams para recuperação de parameterId.
+var router_1 = require('@angular/router');
+// Importar HeroService contendo meios de recuperar lista de herois.
 var hero_service_1 = require('../services/hero.service');
 // Criar Componente HeroDetailComponent
 var HeroDetailComponent = (function () {
     // Construir objeto injetando HeroService e RouteParams.
-    function HeroDetailComponent(_heroService, _routeParams) {
-        this._heroService = _heroService;
-        this._routeParams = _routeParams;
+    function HeroDetailComponent(heroService, routeSegment) {
+        this.heroService = heroService;
+        this.routeSegment = routeSegment;
         // Como HeroDetail precisa informar para quem o "invocou" que há dados saindo
         // É utilizado um "Output" que neste caso, é um EventEmitter.
         this.close = new core_1.EventEmitter();
@@ -29,11 +29,11 @@ var HeroDetailComponent = (function () {
     // Método invocado no momento que o componente termina de inicializar.
     HeroDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // Recuperar "id" do _routeParams, e como este vem como "string" soma-lo com "+" o converte para "int".
-        if (this._routeParams.get("id") !== null) {
-            var id = +this._routeParams.get("id");
+        // Recuperar "id" do routeParams, e como este vem como "string" soma-lo com "+" o converte para "int".
+        if (this.routeSegment.getParam("id") !== null) {
+            var id = +this.routeSegment.getParam("id");
             this.navigated = true;
-            this._heroService.getHero(id).then(function (hero) {
+            this.heroService.getHero(id).then(function (hero) {
                 _this.hero = hero;
             });
         }
@@ -45,7 +45,7 @@ var HeroDetailComponent = (function () {
     // Método para salvar o heroi criado/atualizado.
     HeroDetailComponent.prototype.save = function () {
         var _this = this;
-        this._heroService.save(this.hero).then(function (hero) {
+        this.heroService.save(this.hero).then(function (hero) {
             _this.hero = hero;
             _this.goBack(hero);
         }).catch(function (error) {
@@ -79,7 +79,7 @@ var HeroDetailComponent = (function () {
             templateUrl: 'app/templates/hero-detail.component.html',
             styleUrls: ['app/styles/hero-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService, router_deprecated_1.RouteParams])
+        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.RouteSegment])
     ], HeroDetailComponent);
     return HeroDetailComponent;
 }());

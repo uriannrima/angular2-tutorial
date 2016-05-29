@@ -21,7 +21,7 @@ var hero_detail_component_1 = require('./hero-detail.component');
 // Importar HeroFormComponent contendo formulário de heroi.
 var hero_form_component_1 = require('./hero-form.component');
 // Importar Configurações de Router, Directives e Providers (Services).
-var router_deprecated_1 = require('@angular/router-deprecated');
+var router_1 = require('@angular/router');
 // Configuração de Rota
 // O Router irá colocar o conteudo do componente referenciado exatamente abaixo de <router-outlet>
 var AppComponent = (function () {
@@ -30,35 +30,27 @@ var AppComponent = (function () {
         this.title = 'Tour of Heroes';
     }
     AppComponent = __decorate([
-        router_deprecated_1.RouteConfig([
+        router_1.Routes([
             {
                 // Path analisado no Browser.
                 path: '/heroes',
-                // Nome para utilização no Router Link
-                name: 'Heroes',
                 // Componente que será invocado.
                 component: heroes_component_1.HeroesComponent
             },
             {
                 // Path analisado no Browser.
-                path: '/dashboard',
-                // Nome para utilização no Router Link
-                name: 'Dashboard',
+                path: '/',
                 // Componente que será invocado.
                 component: dashboard_component_1.DashboardComponent,
-                // Esta rota é considerada a padrão?
-                useAsDefault: true
             },
             {
                 // Path analisado no Browser contendo "parameterId".
                 path: '/detail/:id',
-                name: 'HeroDetail',
                 component: hero_detail_component_1.HeroDetailComponent
             },
             {
                 // Path analisado no Browser contendo "parameterId".
                 path: '/form/:id',
-                name: 'HeroForm',
                 component: hero_form_component_1.HeroFormComponent
             }
         ]),
@@ -70,10 +62,10 @@ var AppComponent = (function () {
             templateUrl: 'app/templates/app.component.html',
             // Com "Directives" informamos para o Component quais elementos HTML ele deve considerar
             // Sem este, ele ve <my-hero-detail> e considera uma tag comum.
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES],
+            directives: [router_1.ROUTER_DIRECTIVES],
             // Providers contem a lista de componentes/classes injetadas no componente.
             // Sem este, o injetor não consegue determinar quais objetos estão sendo injetados na construção.
-            providers: [hero_service_1.HeroService, router_deprecated_1.ROUTER_PROVIDERS],
+            providers: [hero_service_1.HeroService, router_1.ROUTER_PROVIDERS],
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

@@ -4,10 +4,10 @@ import { NgForm } from '@angular/common';
 import { Hero } from '../models/hero';
 import { BaseComponent, Effects } from './base.component';
 
-// Importar _routeParams para recuperação de parameterId.
-import { RouteParams } from '@angular/router-deprecated';
+// Importar RouteParams para recuperação de parameterId.
+import { RouteSegment } from '@angular/router';
 
-// Importar _heroService contendo meios de recuperar lista de herois.
+// Importar HeroService contendo meios de recuperar lista de herois.
 import { HeroService } from '../services/hero.service';
 
 @Component({
@@ -27,15 +27,15 @@ export class HeroFormComponent extends BaseComponent implements OnInit {
     // Form esta ativo?
     active = true;
 
-    constructor(private _heroService: HeroService, private _routeParams: RouteParams) {
+    constructor(private heroService: HeroService, private routeSegment: RouteSegment) {
         super();
     }
 
     // ngOnInit invocado para apresentar os componentes padrões.
     ngOnInit() {
-        if (this._routeParams.get("id") !== null) {
-            let id = +this._routeParams.get("id");
-            this._heroService.getHero(id).then(
+        if (this.routeSegment.getParam("id") !== null) {
+            let id = +this.routeSegment.getParam("id");
+            this.heroService.getHero(id).then(
                 hero => {
                     this.hero = hero;
                     this.show("#pnlHeroForm");
@@ -57,7 +57,7 @@ export class HeroFormComponent extends BaseComponent implements OnInit {
     onSubmit() {
         // Esconder pnlHeroForm
         this.hide("#pnlHeroForm", () => {
-            this._heroService.save(this.hero).then(
+            this.heroService.save(this.hero).then(
                 hero => {
                     this.hero = hero;
                     // Remover componentes que não devem aparecer.

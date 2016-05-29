@@ -4,10 +4,10 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 // Importar modelo Hero.
 import { Hero } from '../models/hero';
 
-// Importar _routeParams para recuperação de parameterId.
-import { RouteParams } from '@angular/router-deprecated';
+// Importar RouteParams para recuperação de parameterId.
+import { RouteSegment } from '@angular/router';
 
-// Importar _heroService contendo meios de recuperar lista de herois.
+// Importar HeroService contendo meios de recuperar lista de herois.
 import { HeroService } from '../services/hero.service';
 
 // Criar Componente HeroDetailComponent
@@ -39,15 +39,15 @@ export class HeroDetailComponent implements OnInit {
     error: any;
 
     // Construir objeto injetando HeroService e RouteParams.
-    constructor(private _heroService: HeroService, private _routeParams: RouteParams) { }
+    constructor(private heroService: HeroService, private routeSegment: RouteSegment) { }
 
     // Método invocado no momento que o componente termina de inicializar.
     ngOnInit() {
-        // Recuperar "id" do _routeParams, e como este vem como "string" soma-lo com "+" o converte para "int".
-        if (this._routeParams.get("id") !== null) {
-            let id = +this._routeParams.get("id");
+        // Recuperar "id" do routeParams, e como este vem como "string" soma-lo com "+" o converte para "int".
+        if (this.routeSegment.getParam("id") !== null) {
+            let id = +this.routeSegment.getParam("id");
             this.navigated = true;
-            this._heroService.getHero(id).then(
+            this.heroService.getHero(id).then(
                 hero => {
                     this.hero = hero
                 }
@@ -60,7 +60,7 @@ export class HeroDetailComponent implements OnInit {
 
     // Método para salvar o heroi criado/atualizado.
     save() {
-        this._heroService.save(this.hero).then(
+        this.heroService.save(this.hero).then(
             hero => {
                 this.hero = hero;
                 this.goBack(hero);

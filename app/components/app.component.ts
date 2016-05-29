@@ -17,39 +17,31 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroFormComponent } from './hero-form.component';
 
 // Importar Configurações de Router, Directives e Providers (Services).
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 // Configuração de Rota
 // O Router irá colocar o conteudo do componente referenciado exatamente abaixo de <router-outlet>
-@RouteConfig([
+@Routes([
     {
         // Path analisado no Browser.
         path: '/heroes',
-        // Nome para utilização no Router Link
-        name: 'Heroes',
         // Componente que será invocado.
         component: HeroesComponent
     },
     {
         // Path analisado no Browser.
-        path: '/dashboard',
-        // Nome para utilização no Router Link
-        name: 'Dashboard',
+        path: '/',
         // Componente que será invocado.
         component: DashboardComponent,
-        // Esta rota é considerada a padrão?
-        useAsDefault: true
     },
     {
         // Path analisado no Browser contendo "parameterId".
         path: '/detail/:id',
-        name: 'HeroDetail',
         component: HeroDetailComponent
     },
     {
         // Path analisado no Browser contendo "parameterId".
         path: '/form/:id',
-        name: 'HeroForm',
         component: HeroFormComponent
     }
 ])
