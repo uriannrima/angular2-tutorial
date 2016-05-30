@@ -5,7 +5,7 @@ import { Hero } from '../models/hero';
 import { BaseComponent, Effects } from './base.component';
 
 // Importar RouteParams para recuperação de parameterId.
-import { RouteSegment } from '@angular/router';
+import { RouteSegment, Router } from '@angular/router';
 
 // Importar HeroService contendo meios de recuperar lista de herois.
 import { HeroService } from '../services/hero.service';
@@ -27,7 +27,7 @@ export class HeroFormComponent extends BaseComponent implements OnInit {
     // Form esta ativo?
     active = true;
 
-    constructor(private heroService: HeroService, private routeSegment: RouteSegment) {
+    constructor(private heroService: HeroService, private routeSegment: RouteSegment, private router : Router) {
         super();
     }
 
@@ -47,10 +47,9 @@ export class HeroFormComponent extends BaseComponent implements OnInit {
         }
     }
 
-    onReturn() {
-        if (this.hero.id !== null) {
-            window.history.back();
-        }
+    onDashboard() {        
+        // Invocar navegação de volta para o Dashboard.
+        this.router.navigate(['/']);
     }
 
     // Método de Submit do Form.

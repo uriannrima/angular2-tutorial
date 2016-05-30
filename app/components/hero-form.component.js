@@ -23,10 +23,11 @@ var router_1 = require('@angular/router');
 var hero_service_1 = require('../services/hero.service');
 var HeroFormComponent = (function (_super) {
     __extends(HeroFormComponent, _super);
-    function HeroFormComponent(heroService, routeSegment) {
+    function HeroFormComponent(heroService, routeSegment, router) {
         _super.call(this);
         this.heroService = heroService;
         this.routeSegment = routeSegment;
+        this.router = router;
         // Lista de Super Poderes
         this.powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
         // Heroi default.
@@ -51,10 +52,9 @@ var HeroFormComponent = (function (_super) {
             this.show("#pnlHeroForm");
         }
     };
-    HeroFormComponent.prototype.onReturn = function () {
-        if (this.hero.id !== null) {
-            window.history.back();
-        }
+    HeroFormComponent.prototype.onDashboard = function () {
+        // Invocar navegação de volta para o Dashboard.
+        this.router.navigate(['/']);
     };
     // Método de Submit do Form.
     HeroFormComponent.prototype.onSubmit = function () {
@@ -117,7 +117,7 @@ var HeroFormComponent = (function (_super) {
             selector: 'hero-form',
             templateUrl: 'app/templates/hero-form.component.html'
         }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.RouteSegment])
+        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.RouteSegment, router_1.Router])
     ], HeroFormComponent);
     return HeroFormComponent;
 }(base_component_1.BaseComponent));
